@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+.operation__row {
+    display: flex;
+    align-items: center;
+    width: 500px;
+}
+.operation__cell {
+    margin: 20px 10px;
+}
