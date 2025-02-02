@@ -5,7 +5,7 @@ import {alert} from "../utils/alert";
 
 function UpdateModal(props) {
     const handleClose = () => props.setItem(null);
-    const [assetType, setAssetType] = useState(1);
+    const [assetType, setAssetType] = useState(props.item.classId);
     const onChangeAssetType = (ev) => {
         setAssetType(Number(ev.target.value));
     }
