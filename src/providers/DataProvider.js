@@ -11,6 +11,9 @@
 export class DataProvider {
     data = {};
     ids;
+    lastIds = {
+
+    }
 
     assetIds = [1,2,5,7,8];
 
@@ -38,8 +41,12 @@ export class DataProvider {
         let items = [];
         if(items) {
             this.assetIds.forEach((classId) => {
+                let lastId = null;
                 for(let id in this.data[classId]) {
                     let model = this.data[classId][id];
+                    if(id > lastId) {
+                        lastId = id;
+                    }
                     items.push({
                         id: model.id,
                         name: model.name,
@@ -47,8 +54,9 @@ export class DataProvider {
                         classId: classId
                     });
                 }
+                this.lastIds[classId] = lastId;
             });
-            items.sort((a, b) => a.amount - b.amount);
+            items.sort((a, b) => b.amount - a.amount);
         }
         return items;
     }
@@ -103,6 +111,8 @@ export class DataProvider {
 
     findItem(id, classId)
     {
+        id = Number(id);
+        classId = Number(classId);
         const classData = this.data[classId];
         if(classData && classData[id]) {
             let item = classData[id];
@@ -115,10 +125,24 @@ export class DataProvider {
 
     updateItem(id, classId, item)
     {
+        id = Number(id);
+        classId = Number(classId);
         if(this.findItem(id, classId)) {
+            item.classId = classId;
+            item.id = id;
             this.data[classId][id] = item;
             return this.getTableData();
         }
+    }
+    createItem(classId, item)
+    {
+        classId = Number(classId);
+        let lastId = this.lastIds[classId];
+        let id = lastId + 1;
+        item.id = id;
+        item.classId = classId;
+        this.data[classId][id] = item;
+        return this.getTableData();
     }
 
     removeItem(id, classId)
@@ -130,9 +154,5 @@ export class DataProvider {
         } else {
             return null;
         }
-    }
-
-    _createModelByClassId(classId) {
-
     }
 }

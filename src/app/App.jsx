@@ -5,6 +5,9 @@ import RequestService from "../utils/Services/RequestService";
 import {DataProvider} from "../providers/DataProvider";
 import MyForm from "../components/MyForm";
 import Alert from 'react-bootstrap/Alert';
+import Button from "react-bootstrap/Button";
+import UpdateModal from "../components/UpdateModal";
+import CreateModal from "../components/CreateModal";
 
 const provider = new DataProvider();
 
@@ -14,15 +17,17 @@ const App = () => {
         provider.load(data);
         setTableData(provider.getTableData());
     }
+    const [item, setItem] = useState();
     useEffect( () => {
         fetchData();
     }, []);
-    const [tableData, setTableData] = useState([]);
-    let showModal = false;
-    const [item, setItem] = useState();
-    if(item) {
-        showModal = true;
+
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    function onClickCreate () {
+        setShowCreateModal(true);
     }
+    const [tableData, setTableData] = useState([]);
+
     return (
         <div className='container'>
             <div id={'alert-container'}>
@@ -41,8 +46,13 @@ const App = () => {
                     </Alert>
                 ))}
             </div>
+            <div className={'d-flex justify-content-end mb-3'}>
+                <Button onClick={onClickCreate} >Добавить</Button>
+            </div>
             <MyTable provider={provider} data={tableData} setData={setTableData} item={item} setItem={setItem} />
-            {showModal ? <MyForm provider={provider} setShow={setItem} setData={setTableData} item={item} setItem={setItem} /> : ''}
+            {item ? <UpdateModal provider={provider} setShow={setItem} setData={setTableData} item={item} setItem={setItem} /> : ''}
+            {showCreateModal ? <CreateModal provider={provider} setShow={setShowCreateModal} setData={setTableData} /> : ''}
+            {}
         </div>
     );
 };

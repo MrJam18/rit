@@ -2,17 +2,12 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Amount from "./Amount";
+import MyInput from "./MyInput";
 function CashCashBoxAsset({item, provider}) {
 
     return (
         <>
-            <InputGroup className="mb-3">
-                <InputGroup.Text value={item.bank_name} id="cashbox_name">Название кассы</InputGroup.Text>
-                <Form.Control
-                    name='cashbox_name'
-                    aria-describedby="cashbox_name"
-                />
-            </InputGroup>
+            <MyInput defaultValue={item.cashbox_name} name={'cashbox_name'} label={'Название кассы'} />
             <Amount item={item} provider={provider} />
         </>
     );

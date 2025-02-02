@@ -4,11 +4,10 @@ namespace app\models\assets;
 
 class MaterialAsset extends NonMonetaryAsset
 {
-    public float $initial_amount;
-    public float $final_amount;
-    public int $manufacturing_year;
-    public int $material_measurement_unit_id;
-    public int $quantity;
+    public $initial_amount = null;
+    public $final_amount = null;
+    public $manufacturing_year = null;
+    public $material_measurement_unit_id = null;
 
     public const CLASS_ID = 5;
 
@@ -17,7 +16,6 @@ class MaterialAsset extends NonMonetaryAsset
         return array_merge(parent::rules(), [
            [['initial_amount', 'final_amount'], 'number'],
            [['manufacturing_year'], 'date', 'format' => 'yyyy'],
-           [['quantity'], 'integer', 'min' => 1],
            [['material_measurement_unit_id'], 'in', 'range' => MaterialMeasurementUnit::UNITS],
            [['quantity', 'material_measurement_unit_id'], 'required'],
         ]);
@@ -26,11 +24,12 @@ class MaterialAsset extends NonMonetaryAsset
     public function attributeLabels(): array
     {
         return array_merge(parent::attributeLabels(), [
-            'initial_amount' => 'Начальная балансовая стоимость',
-            'final_amount' => 'Остаточная балансовая стоимость',
+            'initial_amount' => 'Начальная стоимость',
+            'final_amount' => 'Остаточная стоимость',
             'amount' => 'Оценочная стоимость',
-            'quantity' => 'Единица измерения',
-            'material_measurement_unit_id' => 'Система измерения'
+            'quantity' => 'Количество',
+            'material_measurement_unit_id' => 'Система измерения',
+            'manufacturing_year' => 'Год производства'
         ]);
     }
 }

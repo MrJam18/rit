@@ -5,8 +5,8 @@ namespace app\models\assets;
 class BankCashAsset extends FinancialAsset
 {
     public const CLASS_ID = 1;
-    public string $bank_name;
-    public string $current_account;
+    public $bank_name = null;
+    public $current_account = null;
 
     public function rules(): array
     {
@@ -21,7 +21,7 @@ class BankCashAsset extends FinancialAsset
     {
         return array_merge(parent::attributeLabels(), [
             'bank_name' => 'Название банка',
-            'current_account' => 'Номер расчетного счета',
+            'current_account' => 'Расчетный счет',
         ]);
     }
 }

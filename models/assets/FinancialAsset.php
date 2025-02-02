@@ -15,7 +15,7 @@ abstract class FinancialAsset extends Asset
     public function attributeLabels(): array
     {
         return array_merge(parent::attributeLabels(), [
-           'amount' => 'Общая сумма',
+           'amount' => 'Cумма актива',
         ]);
     }
 }

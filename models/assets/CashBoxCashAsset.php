@@ -5,7 +5,7 @@ namespace app\models\assets;
 class CashBoxCashAsset extends FinancialAsset
 {
     public const CLASS_ID = 2;
-    public string $cashbox_name;
+    public $cashbox_name = null;
     public function rules(): array
     {
         return array_merge(parent::rules(), [

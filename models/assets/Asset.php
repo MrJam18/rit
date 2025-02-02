@@ -6,10 +6,10 @@ use app\models\Model;
 
 abstract class Asset extends Model
 {
-    public int $id;
-    public string $name;
-    public float $amount;
-    public int $currency_id;
+    public $id = null;
+    public $name = null;
+    public $amount = null;
+    public $currency_id = null;
 
     const CLASS_ID_TO_CLASS = [
         CashBoxCashAsset::CLASS_ID => CashBoxCashAsset::class,
@@ -33,6 +33,7 @@ abstract class Asset extends Model
         return [
             'id' => 'Номер',
             'name' => 'Имя Актива',
+            'currency_id' => 'Валюта'
         ];
     }
 }

@@ -2,11 +2,12 @@ import React from 'react';
 import Button from "react-bootstrap/Button";
 import {forEach} from "react-bootstrap/ElementChildren";
 
-const Buttons = ({classId, id, data, setData, setShowModal, item, setItem, provider}) => {
+const Buttons = ({classId, id, setData, setItem, provider}) => {
     const onUpdate = () => {
         const item = provider.findItem(id, classId);
+        console.log(item);
         if (item) {
-            setItem({...item.item});
+            setItem(item);
         }
     }
     const onDelete = () => {
